@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+    {{!-- hmtl head --}}
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS and responsive viewport -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {{!-- website title --}}
+        <title>Meal Planning</title>
+    </head>
+
+    {{!-- html body --}}
+    <body>
+
+        {{!-- header navigation bar --}}
+        <header>
+            <div class="container">
+                <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand" href="#">Meal Planning</a>
+                </nav>
+            </div>
+        </header>
+        
+        {{!-- section body content --}}
+        <section>
+            <div class="container">
+
+                {{!-- bootstrap jumbotron --}}
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Meal Planning Website</h1>
+                        <p class="lead">This is a basic Meal Planning website Application using Bootstrap, HandleBars, NodeJs, and Express.</p>
+                        <p class="lead">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Home Page</a>
+                        </p>
+                    </div>
+                </div>
+
+                {{#if message}}
+                    <div class="container">
+                        <div class="alert alert-danger row justify-content-center">{{message}}</div>
+                    </div>
+                    {{!-- bootstrap table container --}}
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <br />
+                            <table class="table table-responsive">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Protein</th>
+                                    <th>Side</th>
+                                    <th>Date</th>
+                                </tr>
+                                <tr>
+                                    <td>{{addedData._id}}</td>
+                                    <td>{{addedData.protein}}</td>
+                                    <td>{{addedData.side}}</td>
+                                    <td>{{addedData.date}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{!-- bootstrap table container --}}
+                <div class="container h-100" id="addMealIdea">
+                    <h4 class='row justify-content-center'>Fill out form to Add Meal Idea:</h4>
+                    <hr />
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <div class="col-10 col-md-8 col-lg-6">
+                            <form action="/addMealIdea" method="POST">
+                                <div class="form-group">
+                                    <label for="protein">Protein:</label>
+                                    <input id="protein" type="text" name="protein" class="form-control"  placeholder="Enter Protein">
+                                </div>
+                                <div class="form-group">
+                                    <label for="side">Side:</label>
+                                    <input id="side" type="text" name="side" class="form-control" placeholder="Enter Side">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Date:</label>
+                                    <input id="date" type="text" name="date" class="form-control" placeholder="Enter Date">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                            </form>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- bootstrap table container --}}
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <br />
+                        <table class="table table-responsive">
+                            <tr>
+                                <th>ID</th>
+                                <th>Protein</th>
+                                <th>Side</th>
+                                <th>Date</th>
+                            </tr>
+                            {{#each dataListing}}
+                                <tr>
+                                    <td>{{_id}}</td>
+                                    <td>{{protein}}</td>
+                                    <td>{{side}}</td>
+                                    <td>{{date}}</td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{!-- footer navigation bar --}}
+        <footer>
+            <div class="container">
+                <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand" href="#">Meal Planning</a>
+                </nav>
+            </div>
+        </footer>
+        
+        <!-- Optional Bootstrap JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
+
