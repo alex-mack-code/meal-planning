@@ -77,6 +77,7 @@ app.post('/addMealIdea', (req, res) =>
                 message: "Meal idea added to database!",
                 id: data._id,
                 addedData: displayData,
+                plannedDate: data.dateSelect,
                 layout: false // do not use the default Layout
             });
         })

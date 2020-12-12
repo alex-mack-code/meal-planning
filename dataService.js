@@ -24,7 +24,9 @@ var Schema = mongoose.Schema;
 // create schema
 var mealIdeaSchema = new Schema
 ({
-  "mealItem":  [String],
+  mealItem:  [String],
+  "dateSelect": String},
+  {timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 var MealIdea = db.model("meal_idea", mealIdeaSchema);
@@ -36,6 +38,7 @@ module.exports.createMealIdea = (remoteData) =>
     var localMealIdea = new MealIdea
     ({
         mealItem: remoteData.mealItem,
+        dateSelect: remoteData.dateSelect
     });
 
     console.log("localmealidea: ", localMealIdea);
