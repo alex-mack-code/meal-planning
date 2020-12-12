@@ -24,9 +24,7 @@ var Schema = mongoose.Schema;
 // create schema
 var mealIdeaSchema = new Schema
 ({
-  "protein":  String,
-  "side": String,
-  "date": String
+  "mealItem":  [String],
 });
 
 var MealIdea = db.model("meal_idea", mealIdeaSchema);
@@ -37,9 +35,7 @@ module.exports.createMealIdea = (remoteData) =>
 
     var localMealIdea = new MealIdea
     ({
-        protein: remoteData.protein,
-        side: remoteData.side,
-        date: remoteData.date
+        mealItem: remoteData.mealItem,
     });
 
     console.log("localmealidea: ", localMealIdea);
@@ -63,7 +59,7 @@ module.exports.createMealIdea = (remoteData) =>
 };
 
 // get one meal idea
-module.exports.getMealIdeaById = (remoteData) =>
+module.exports.readMealIdeaById = (remoteData) =>
 {
     return new Promise(function(resolve,reject){
 
@@ -82,7 +78,7 @@ module.exports.getMealIdeaById = (remoteData) =>
 };
 
 // get one meal idea
-module.exports.getAllMealIdea = () =>
+module.exports.getAllMealIdeas = () =>
 {
     return new Promise (function(resolve, reject)
     {

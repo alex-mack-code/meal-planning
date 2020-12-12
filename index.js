@@ -12,6 +12,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// to setup paths for static files
+const path = require('path');
+// to use the static folder
+app.use(express.static(path.join(__dirname, '/public/')));
+
 //setup mongoDB
 const mongoDataService = require('./dataService');
 
@@ -30,7 +35,7 @@ app.get("/", function(req,res)
 // route server to index
 app.get("/index", function(req,res)
 {
-    mongoDataService.getAllMealIdea()
+    mongoDataService.getAllMealIdeas()
     .then((data) =>
     {
         res.render('index', {
@@ -44,17 +49,34 @@ app.get("/index", function(req,res)
 // add meal idea
 app.post('/addMealIdea', (req, res) => 
 {
+    console.log(req.body);
     mongoDataService.createMealIdea(req.body)
     .then((createdDataId) => 
     {
         console.log('data returned to successful promise: ', createdDataId);
 
-        mongoDataService.getMealIdeaById(createdDataId)
+        mongoDataService.readMealIdeaById(createdDataId)
         .then((data) =>
         {
+            displayData = []
+            for(var i = 1; i <= data.mealItem.length; i++)
+            {
+                var previous = i - 1;
+                var itemHeader = 'Item ' + i;
+                var itemData = data.mealItem[previous];
+                var localData = {
+                    header: itemHeader,
+                    data: itemData
+                };
+                displayData.push(localData);
+
+            }
+            console.log('data to display: ', displayData);
+
             res.render('index', {
                 message: "Meal idea added to database!",
-                addedData: data,
+                id: data._id,
+                addedData: displayData,
                 layout: false // do not use the default Layout
             });
         })
